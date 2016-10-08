@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端, html, css, javascript" />
+  <meta name="keywords" content="笔记,javascript,闭包,作用域,原型,this取值," />
 
 
 
@@ -86,15 +86,34 @@
 
 
 
-<meta name="description" content="笨鸟慢慢爬">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Allen Tang's Blog">
-<meta property="og:url" content="http://allen286.github.io/index.html">
+<meta name="description" content="部分内容参照了王福朋的博客，王大神深入浅出，解释的很清晰  
+1、闭包“官方”的解释：
+闭包是一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。  
+
+其实这句话通俗的来说就是：JavaScript中所有的function都是一个闭包。不过一般来说，嵌套的function所产生的闭包更为强大，也是大部分时候我们所谓的“闭包”。
+阮一峰：
+“各种专业">
+<meta property="og:type" content="article">
+<meta property="og:title" content="闭包，上下文环境，作用域及this取值 笔记总结">
+<meta property="og:url" content="http://allen286.github.io/2016/10/08/closure/index.html">
 <meta property="og:site_name" content="Allen Tang's Blog">
-<meta property="og:description" content="笨鸟慢慢爬">
+<meta property="og:description" content="部分内容参照了王福朋的博客，王大神深入浅出，解释的很清晰  
+1、闭包“官方”的解释：
+闭包是一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。  
+
+其实这句话通俗的来说就是：JavaScript中所有的function都是一个闭包。不过一般来说，嵌套的function所产生的闭包更为强大，也是大部分时候我们所谓的“闭包”。
+阮一峰：
+“各种专业">
+<meta property="og:updated_time" content="2016-10-08T08:52:16.006Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Allen Tang's Blog">
-<meta name="twitter:description" content="笨鸟慢慢爬">
+<meta name="twitter:title" content="闭包，上下文环境，作用域及this取值 笔记总结">
+<meta name="twitter:description" content="部分内容参照了王福朋的博客，王大神深入浅出，解释的很清晰  
+1、闭包“官方”的解释：
+闭包是一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。  
+
+其实这句话通俗的来说就是：JavaScript中所有的function都是一个闭包。不过一般来说，嵌套的function所产生的闭包更为强大，也是大部分时候我们所谓的“闭包”。
+阮一峰：
+“各种专业">
 
 
 
@@ -115,9 +134,9 @@
 
 
 
-  <link rel="canonical" href="http://allen286.github.io/"/>
+  <link rel="canonical" href="http://allen286.github.io/2016/10/08/closure/"/>
 
-  <title> Allen Tang's Blog </title>
+  <title> 闭包，上下文环境，作用域及this取值 笔记总结 | Allen Tang's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -148,9 +167,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +254,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -259,10 +276,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/10/08/closure/" itemprop="url">
-                  闭包，上下文环境，作用域及this取值 笔记总结
-                </a>
+                闭包，上下文环境，作用域及this取值 笔记总结
               
             
           </h1>
@@ -309,9 +323,7 @@
       
 
       
-        
-          
-            <p>部分内容参照了<a href="http://www.cnblogs.com/wangfupeng1988/p/3977924.html" target="_blank" rel="external">王福朋的博客</a>，王大神深入浅出，解释的很清晰  </p>
+        <p>部分内容参照了<a href="http://www.cnblogs.com/wangfupeng1988/p/3977924.html" target="_blank" rel="external">王福朋的博客</a>，王大神深入浅出，解释的很清晰  </p>
 <h3 id="1、闭包"><a href="#1、闭包" class="headerlink" title="1、闭包"></a>1、闭包</h3><h4 id="“官方”的解释："><a href="#“官方”的解释：" class="headerlink" title="“官方”的解释："></a>“官方”的解释：</h4><blockquote>
 <p>闭包是一个拥有许多变量和绑定了这些变量的环境的表达式（通常是一个函数），因而这些变量也是该表达式的一部分。  </p>
 </blockquote>
@@ -370,150 +382,88 @@
 <h5 id="情况3：函数用call或者apply调用"><a href="#情况3：函数用call或者apply调用" class="headerlink" title="情况3：函数用call或者apply调用"></a>情况3：函数用call或者apply调用</h5><p>当一个函数被<code>call</code>和<code>apply</code>调用时，<code>this</code>的值就取<code>传入的对象</code>的值。</p>
 <h5 id="情况4：全局-amp-调用普通函数"><a href="#情况4：全局-amp-调用普通函数" class="headerlink" title="情况4：全局 &amp; 调用普通函数"></a>情况4：全局 &amp; 调用普通函数</h5><p>在全局环境下，<code>this</code>永远是<code>window</code>，这个应该没有非议。普通函数在调用时，其中的this也都是window。</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/10/06/layout/" itemprop="url">
-                  布局总结（居中，多列，等高）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-06T23:10:22+08:00" content="2016-10-06">
-              2016-10-06
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
           
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/10/06/layout/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/06/layout/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
           
-
+            <a href="/tags/闭包/" rel="tag">#闭包</a>
           
-
+            <a href="/tags/作用域/" rel="tag">#作用域</a>
           
+            <a href="/tags/原型/" rel="tag">#原型</a>
           
-
+            <a href="/tags/this取值/" rel="tag">#this取值</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="一、居中"><a href="#一、居中" class="headerlink" title="一、居中"></a>一、居中</h2><h3 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h3><h4 id="定宽元素水平居中："><a href="#定宽元素水平居中：" class="headerlink" title="定宽元素水平居中："></a>定宽元素水平居中：</h4><p>法一：<code>margin:o auto;</code><br>法二：<code>position:relative</code>或<code>absolute</code>; <code>left:50%; margin-left:负的自身宽度一半</code>；垂直方向同理。<br>（上面两种方法都要求已知元素宽度）<br>法三：元素元素<code>text-align:center；</code>需要将子元素设置为<code>inline</code>或<code>inline-block</code>元素。<br>法四：table方法(不提倡)，水平垂直都可以。父元素<code>display: table；</code>子元素<code>display: table-cell; text-align: center; vertical-align: middle;</code>  </p>
-<h4 id="不定宽元素水平居中："><a href="#不定宽元素水平居中：" class="headerlink" title="不定宽元素水平居中："></a>不定宽元素水平居中：</h4><p>1、外层元素<code>{text-align:center;}</code>，内层元素div<code>{display:inline-block;}</code>  </p>
-<p>2、都<code>position: relative</code>，外层<code>left: 50%</code>，内层<code>left: -50%</code>;<br>效果是inner元素一直在wrap元素的父元素的中间位置，即inner代替wrap来包含其他内容，wrap存在意义单纯为了定位。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;div class="wrap"&gt;&lt;div class="inner"&gt;让 inner 居中&lt;/div&gt;&lt;/div&gt;</div><div class="line">.wrap &#123; </div><div class="line">    float: left; /* 自适应内容宽度 */    </div><div class="line">    position: relative;  left: 50%; </div><div class="line">&#125;</div><div class="line">.inner &#123; </div><div class="line">    position: relative; </div><div class="line">    left: -50%; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="垂直居中："><a href="#垂直居中：" class="headerlink" title="垂直居中："></a>垂直居中：</h3><p>1、<code>position:absolute; top:50%, margin-top:负的元素高度</code>。缺点是要已知高度才行。<br>2、<code>vertical-align:middle;</code> 只用用于inline及inline-block元素。缺点：幽灵空白<br>单行文字垂直居中直接line-height和height值相等就行<br>多行文字垂直居中同理。注：父元素font-size: 0是为了清除幽灵空白符默认的baseline对齐。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.multi-line</span>&#123;<span class="attribute">height</span>:<span class="number">200px</span>;<span class="attribute">width</span>:<span class="number">200px</span>;<span class="attribute">background-color</span>:<span class="number">#ddd</span>;<span class="attribute">line-height</span>:<span class="number">200px</span>;<span class="attribute">text-align</span>: center;<span class="attribute">font-size</span>: <span class="number">0</span>;&#125;</div><div class="line"><span class="selector-class">.multi-line</span> <span class="selector-tag">span</span>&#123;<span class="attribute">display</span>:inline-block; <span class="attribute">font-size</span>: <span class="number">16px</span>;<span class="attribute">line-height</span>:<span class="number">1.4em</span>; <span class="attribute">vertical-align</span>:middle;&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="利用CSS3实现不定宽高元素水平垂直同时居中"><a href="#利用CSS3实现不定宽高元素水平垂直同时居中" class="headerlink" title="利用CSS3实现不定宽高元素水平垂直同时居中"></a>利用CSS3实现不定宽高元素水平垂直同时居中</h3><p>优点：简便且不需要知道元素宽度和高度；缺点：兼容性不好  </p>
-<p>1、<code>transform : translate()</code>，IE9及以上<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123; </div><div class="line">    <span class="attribute">position </span>: absolute; </div><div class="line">    <span class="attribute">top</span>: <span class="number">50%</span>; <span class="attribute">left</span>: <span class="number">50%</span>; </div><div class="line">    <span class="attribute">transform </span>: <span class="built_in">translate</span>(-50%,-50%); </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>2、<code>flex-box</code>，IE11及以上，IE10部分支持2012版本，需要-ms-前缀。<br>flex属性一直修改变化，从box(09年)到flexbox(11年)到flex(12年)，注意兼容。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attribute">display</span>:flex;  <span class="attribute">display</span>: -ms-flexbox;  <span class="comment">/* TWEENER - IE 10 */</span></div><div class="line">    <span class="attribute">justify-content</span>: center;  <span class="comment">/*主轴方向上的对齐方式，主轴方向默认水平，可通过flex-direction设置*/</span></div><div class="line">    <span class="attribute">align-items</span>: center;  <span class="comment">/*交叉轴方向上的对齐方式*/</span></div><div class="line">    <span class="comment">/*align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用*/</span> </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="二、多列布局"><a href="#二、多列布局" class="headerlink" title="二、多列布局"></a>二、多列布局</h2><h3 id="两列布局，左列宽度固定，右列宽度自适应"><a href="#两列布局，左列宽度固定，右列宽度自适应" class="headerlink" title="两列布局，左列宽度固定，右列宽度自适应"></a>两列布局，左列宽度固定，右列宽度自适应</h3><p>1、左列<code>float</code>，右列<code>margin-left</code><br>2、左列<code>floa</code>，右列<code>overflow:hidden</code>（原理是触发BFC）<br>（注意：前两种方法右列一定不能设置宽度！不能写width:100%;）<br>3、外层<code>display:flex</code>，右列<code>flex:1</code> </p>
-<p>两列固定比例布局就都float，宽度设置百分比；<br>CSS3中的<code>column</code>多列布局也很方便，缺点只能等宽度；  </p>
-<h3 id="三列布局，左右两列宽度固定，中间一列宽度自适应"><a href="#三列布局，左右两列宽度固定，中间一列宽度自适应" class="headerlink" title="三列布局，左右两列宽度固定，中间一列宽度自适应"></a>三列布局，左右两列宽度固定，中间一列宽度自适应</h3><p>法一：html中dom结构顺序是先左右列div，再中间列div<br>左列<code>float:left</code>，右列<code>float:right</code>，中间列：设置对应的左右<code>margin</code>（或用<code>overflow:hidden</code>）  </p>
-<p>法二：html中先中间div，再左右div（双飞翼布局）<br>三列全部<code>float</code>，然后左列<code>margin-left:-100%</code>，右列<code>margin-left:-自身宽度</code><br>（此法注意中间列真实宽度100%，左右列覆盖在上面，可再添加一<code>内层div，设置左右margin</code>，来保证显示区域不被左右列覆盖）</p>
-<p>法三：圣杯布局（略）</p>
-<p>法四：<code>flex</code>，这种最简单。左右固定<code>basis</code>如<code>100px</code>为宽度，不缩放；中间缩放为<code>1</code>。<br>同时还能设置几列固定比例，如将具体宽度设置成百分数即可(<code>20%,60%,20%</code>)。</p>
-<h2 id="三、多列列自适应等高"><a href="#三、多列列自适应等高" class="headerlink" title="三、多列列自适应等高"></a>三、多列列自适应等高</h2><h5 id="让所有列与最高的那一列同高"><a href="#让所有列与最高的那一列同高" class="headerlink" title="让所有列与最高的那一列同高"></a>让所有列与最高的那一列同高</h5><p>如果其中一列的文字特别长，而其他两列很短，就有必要增加内外边距的抵消。<br>比如把较短的几列<code>内边距设置500px</code>，<code>外边距-500px</code>;就可以增加隐藏的填充部分。同时外层容器要设置<code>overflow：hidden</code>。</p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/06/layout/" rel="next" title="布局总结（居中，多列，等高）">
+                <i class="fa fa-chevron-left"></i> 布局总结（居中，多列，等高）
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/08/closure/"
+     data-title="闭包，上下文环境，作用域及this取值 笔记总结"
+     data-content=""
+     data-url="http://allen286.github.io/2016/10/08/closure/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
@@ -521,6 +471,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/08/closure/"
+           data-title="闭包，上下文环境，作用域及this取值 笔记总结" data-url="http://allen286.github.io/2016/10/08/closure/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -540,8 +498,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -629,6 +596,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、闭包"><span class="nav-number">1.</span> <span class="nav-text">1、闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#“官方”的解释："><span class="nav-number">1.1.</span> <span class="nav-text">“官方”的解释：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阮一峰："><span class="nav-number">1.2.</span> <span class="nav-text">阮一峰：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#某博客："><span class="nav-number">1.3.</span> <span class="nav-text">某博客：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#王福朋："><span class="nav-number">1.4.</span> <span class="nav-text">王福朋：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#个人理解："><span class="nav-number">1.5.</span> <span class="nav-text">个人理解：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、上下文环境"><span class="nav-number">2.</span> <span class="nav-text">2、上下文环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局代码的上下文环境数据内容为："><span class="nav-number">2.1.</span> <span class="nav-text">全局代码的上下文环境数据内容为：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行上下文环境，王福朋大神给的通俗解释："><span class="nav-number">2.2.</span> <span class="nav-text">执行上下文环境，王福朋大神给的通俗解释：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、函数作用域"><span class="nav-number">3.</span> <span class="nav-text">3、函数作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#作用域与执行上下文环境"><span class="nav-number">3.1.</span> <span class="nav-text">作用域与执行上下文环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作用域与自由变量"><span class="nav-number">3.2.</span> <span class="nav-text">作用域与自由变量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、函数作用域与上下文环境的区别？"><span class="nav-number">4.</span> <span class="nav-text">4、函数作用域与上下文环境的区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5、this的取值"><span class="nav-number">4.1.</span> <span class="nav-text">5、this的取值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#情况1：构造函数"><span class="nav-number">4.1.1.</span> <span class="nav-text">情况1：构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#情况2：函数作为对象的一个属性"><span class="nav-number">4.1.2.</span> <span class="nav-text">情况2：函数作为对象的一个属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#情况3：函数用call或者apply调用"><span class="nav-number">4.1.3.</span> <span class="nav-text">情况3：函数用call或者apply调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#情况4：全局-amp-调用普通函数"><span class="nav-number">4.1.4.</span> <span class="nav-text">情况4：全局 & 调用普通函数</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -732,6 +710,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

@@ -68,11 +68,13 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="前端, html, css, javascript" />
 
 
 
 
+
+  <link rel="alternate" href="/atom.xml" title="Allen Tang's Blog" type="application/atom+xml" />
 
 
 
@@ -87,7 +89,7 @@
 <meta name="description" content="笨鸟慢慢爬">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Allen Tang's Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2016/10/index.html">
+<meta property="og:url" content="http://allen286.github.io/archives/2016/10/index.html">
 <meta property="og:site_name" content="Allen Tang's Blog">
 <meta property="og:description" content="笨鸟慢慢爬">
 <meta name="twitter:card" content="summary">
@@ -113,7 +115,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2016/10/"/>
+  <link rel="canonical" href="http://allen286.github.io/archives/2016/10/"/>
 
   <title> 归档 | Allen Tang's Blog </title>
 </head>
@@ -123,6 +125,16 @@
   
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?9e1922ec830871f871b0b1aeb45a5444";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -150,7 +162,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">生存以上，生活以下.</p>
+  <p class="site-subtitle">生存以上，生活以下</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -178,26 +190,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -214,6 +206,16 @@
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
           </a>
         </li>
       
@@ -243,7 +245,7 @@
       
         
       
-      嗯..! 目前共计 1 篇日志。 继续努力。
+      嗯..! 目前共计 2 篇日志。 继续努力。
     </span>
 
     
@@ -267,7 +269,44 @@
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/10/06/postName/" itemprop="url">
+            <a class="post-title-link" href="/2016/10/08/closure/" itemprop="url">
+              
+                <span itemprop="name">闭包，上下文环境，作用域及this取值 笔记总结</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2016-10-08T16:38:44+08:00"
+              content="2016-10-08" >
+          10-08
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+
+    
+
+      
+      
+      
+
+      
+      
+
+      
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2016/10/06/layout/" itemprop="url">
               
                 <span itemprop="name">布局总结（居中，多列，等高）</span>
               
@@ -332,7 +371,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -342,7 +381,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -351,8 +390,53 @@
         </nav>
 
         
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
 
         <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allen286" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/56571100" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:ascend286@126.com" target="_blank" title="邮箱">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  邮箱
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://allen286.github.io/resume" target="_blank" title="简历">
+                  
+                    <i class="fa fa-fw fa-user"></i>
+                  
+                  简历
+                </a>
+              </span>
+            
           
         </div>
 
@@ -483,9 +567,30 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"allen286"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 
