@@ -1,0 +1,748 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ECMAScript 6,ES6,javascript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Allen Tang's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="为了面试，赶紧把ES6标准入门大致翻了一下，下面是一些要点笔记，很散很浅，以后再慢慢深入学习。
+块级作用域终于等来了块级作用域，但感觉以前学的好多的奇淫技巧可能以后就用不上了……
+let和const不存在变量提升，不允许重复声明let，const与块级作用域结合。以后可以用let取代var了，全局变量优先用常量const。
+变量的解构赋值这个蛮方便的，很强大，很多地方可以用到
+拓展运算符(…)
+拓">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6标准入门粗读">
+<meta property="og:url" content="http://allen286.github.io/2016/10/11/es6/index.html">
+<meta property="og:site_name" content="Allen Tang's Blog">
+<meta property="og:description" content="为了面试，赶紧把ES6标准入门大致翻了一下，下面是一些要点笔记，很散很浅，以后再慢慢深入学习。
+块级作用域终于等来了块级作用域，但感觉以前学的好多的奇淫技巧可能以后就用不上了……
+let和const不存在变量提升，不允许重复声明let，const与块级作用域结合。以后可以用let取代var了，全局变量优先用常量const。
+变量的解构赋值这个蛮方便的，很强大，很多地方可以用到
+拓展运算符(…)
+拓">
+<meta property="og:updated_time" content="2016-10-11T14:13:39.632Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6标准入门粗读">
+<meta name="twitter:description" content="为了面试，赶紧把ES6标准入门大致翻了一下，下面是一些要点笔记，很散很浅，以后再慢慢深入学习。
+块级作用域终于等来了块级作用域，但感觉以前学的好多的奇淫技巧可能以后就用不上了……
+let和const不存在变量提升，不允许重复声明let，const与块级作用域结合。以后可以用let取代var了，全局变量优先用常量const。
+变量的解构赋值这个蛮方便的，很强大，很多地方可以用到
+拓展运算符(…)
+拓">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://allen286.github.io/2016/10/11/es6/"/>
+
+  <title> ES6标准入门粗读 | Allen Tang's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?9e1922ec830871f871b0b1aeb45a5444";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Allen Tang's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">生存以上，生活以下</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ES6标准入门粗读
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-11T22:05:37+08:00" content="2016-10-11">
+              2016-10-11
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/11/es6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/es6/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为了面试，赶紧把ES6标准入门大致翻了一下，下面是一些要点笔记，很散很浅，以后再慢慢深入学习。</p>
+<h4 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h4><p>终于等来了块级作用域，但感觉以前学的好多的奇淫技巧可能以后就用不上了……</p>
+<h4 id="let和const"><a href="#let和const" class="headerlink" title="let和const"></a>let和const</h4><p>不存在变量提升，不允许重复声明let，const与块级作用域结合。<br>以后可以用let取代var了，全局变量优先用常量const。</p>
+<h4 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h4><p>这个蛮方便的，很强大，很多地方可以用到</p>
+<h4 id="拓展运算符-…"><a href="#拓展运算符-…" class="headerlink" title="拓展运算符(…)"></a>拓展运算符(…)</h4><ol>
+<li>拓展运算符+数组，用于将数组转化为，分割的的参数序列。  </li>
+</ol>
+<ul>
+<li>可以用来替代apply传参，例如<code>Math.max(...[1,2,3,5]) //5</code></li>
+<li>还可以用来合并数组，替代concat，例如<code>[1,2,...[3,4]] //[1, 2, 3, 4]</code></li>
+<li>与解构赋值搭配使用例如<code>[first,...rest]=[1,2,3,4,5]//rest=[2,3,4,5]</code> </li>
+</ul>
+<ol>
+<li>将字符串，类数组对象，Map及Set结构等具有iterator接口的对象转化为数组，<br>例如<code>[...&#39;haha&#39;] //[&quot;h&quot;, &quot;a&quot;, &quot;h&quot;, &quot;a&quot;]；[...arguments]；[...nodeList]；[...map.keys()]</code>  </li>
+</ol>
+<p><strong>rest参数</strong>，形式为“…变量名”，其实上面介绍拓展运算符时已经提到了。<br>如<code>function fn(...argname){}</code>，用于获取多与参数，把逗号隔开的值序列组合成一个数组，这样就不需要使用arguments对象了。<br><strong>注意</strong>：</p>
+<ul>
+<li>rest参数后面不能再有其他属性，不然会报错。<code>function(...a,b){} //error</code></li>
+<li>函数的length属性不包括rest参数，例如<code>function(a, ...b){}.length  //1</code></li>
+</ul>
+<h4 id="数组的拓展："><a href="#数组的拓展：" class="headerlink" title="数组的拓展："></a>数组的拓展：</h4><p><code>Array.from()</code>方法，用于将类数组对象和可遍历对象转化为数组。  </p>
+<ul>
+<li>类数组对象：arguments，NodeList集合，及具有length的对象  </li>
+<li>可遍历对象：字符串，及新增的Map和Set结构都具有Iterator接口，都可以被转化  </li>
+</ul>
+<h4 id="对象的拓展："><a href="#对象的拓展：" class="headerlink" title="对象的拓展："></a>对象的拓展：</h4><ul>
+<li>属性简洁表示法：允许写入对象和函数作为对象的属性和方法。允许只写属性名不写属性值，这是属性值等于属性名所代表的变量，如<code>ar foo=&#39;hehe&#39;; var obj={foo}; //obj{foo:&#39;hehe&#39;}</code>  </li>
+<li>属性名表达式：字面量定义时，允许表达式作为属性名，放在方括号内即可。<br>上面两者不能同时使用，否则会报错  </li>
+</ul>
+<p>对象方法的<code>name</code>属性，返回方法名</p>
+<p><code>Object.is()</code>用来比较两个值是否严格相等，类似===，但在+0===-0及NaN===NaN上有差别。<br><strong><code>Object.assign(target, source1,sourse2...)</code></strong>，将源对象可枚举属性复制到目标对象。<br>可以用来克隆对象，<code>Object.assign({},origin)</code><br>可以用来合并多个对象，<code>Object.assign({}, ...source)</code> </p>
+<blockquote>
+<p>当我们调用下面的函数的时候，由于Object.assign将覆盖之前的内容，所以并不能完全的做到融合对象，而是全部替换掉，所以返回的对象内容将变成最后一个值:<code>{a: {c: 3}</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object.assign(&#123;a: &#123;b: 0&#125;&#125;, &#123;a: &#123;b: 1, c: 2&#125;&#125;, &#123;a: &#123;c: 3&#125;&#125;);</div></pre></td></tr></table></figure></p>
+<p>如何深层次的融合对象，比如我们期望的输出结果为：<br><code>{a:{b:1,c:3}}</code><br>这样我们必须实现自己的算法来完成深层复制了,不过github上已经有很多好的解决方案，比如<a href="https://github.com/sindresorhus/deep-assign/blob/master/index.js" target="_blank" rel="external">deep-merge</a> 通过递归的方式逐层的去调用assign函数。   </p>
+</blockquote>
+<p>assigh()既不是a的浅拷贝（简单的用等号赋值）也不是a的深拷贝，而是<strong>介于两者之间</strong>——深拷贝了第一级属性。<br>Object.assign() 只是一级属性复制，<strong>比浅拷贝多拷贝了一层</strong>而已。用的时候，要注意这个问题。  </p>
+<blockquote>
+<p>发现一个可以简单实现深拷贝的方法，思路就是将一个对象转成json字符串，然后又将字符串转回对象。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function jsonClone(obj) &#123;</div><div class="line">    return JSON.parse(JSON.stringify(obj));</div><div class="line">&#125;</div><div class="line">var clone = jsonClone(&#123; a:1 &#125;);</div></pre></td></tr></table></figure>
+<p><code>__proto__</code>属性，在附录中，依然是最好不要用。用<code>Object.setPropertyOf()</code>及<code>Object.getPropertyOf()</code>代替。</p>
+<h4 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h4><p>Symbol是ES6引入的一种原始数据类型，表示独一无二的值。作为属性名可以避免冲突。</p>
+<h4 id="Proxy和Reflect"><a href="#Proxy和Reflect" class="headerlink" title="Proxy和Reflect"></a>Proxy和Reflect</h4><p>为了操作对象提供的，等同于在语言层面做出修改，属于一种“元编程”。</p>
+<h4 id="Set和Map数据结构"><a href="#Set和Map数据结构" class="headerlink" title="Set和Map数据结构"></a>Set和Map数据结构</h4><p>非重数组及哈希</p>
+<h4 id="遍历器Iterator"><a href="#遍历器Iterator" class="headerlink" title="遍历器Iterator"></a>遍历器Iterator</h4><p>它是一种接口，为各种不同的数据结构提供统一的访问机制。<br>for……o循环，作为遍历所有数据结构的统一方法，内部是调用Symbol.iterator方法实现的</p>
+<h4 id="Generator函数"><a href="#Generator函数" class="headerlink" title="Generator函数"></a>Generator函数</h4><p>一种异步编程解决方案</p>
+<h4 id="Promise对象"><a href="#Promise对象" class="headerlink" title="Promise对象"></a>Promise对象</h4><p>用来传递异步操作的消息</p>
+<h4 id="async函数与Promise及Generator的比较"><a href="#async函数与Promise及Generator的比较" class="headerlink" title="async函数与Promise及Generator的比较"></a>async函数与Promise及Generator的比较</h4><h4 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h4><p>语法糖，class完全可以看做构造函数的另一种写法。<br>继承extends关键字实现继承，本质还是原型链实现，但写法更清晰更简单了</p>
+<h4 id="修饰器Decorator"><a href="#修饰器Decorator" class="headerlink" title="修饰器Decorator"></a>修饰器Decorator</h4><p>一个表达方式，用于修改类的行为<br>MIxin模式，即混入，在一个对象中混入另一个对象的方法</p>
+<h4 id="模块Module"><a href="#模块Module" class="headerlink" title="模块Module"></a>模块Module</h4><p>import，export<br>与CommonJS加载机制不同，CommonJS模块输出的是值的拷贝，ES6模块输出的是值的引用</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ECMAScript-6/" rel="tag">#ECMAScript 6</a>
+          
+            <a href="/tags/ES6/" rel="tag">#ES6</a>
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/08/closure/" rel="next" title="闭包，上下文环境，作用域及this取值 笔记总结">
+                <i class="fa fa-chevron-left"></i> 闭包，上下文环境，作用域及this取值 笔记总结
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/11/es6/"
+     data-title="ES6标准入门粗读"
+     data-content=""
+     data-url="http://allen286.github.io/2016/10/11/es6/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/11/es6/"
+           data-title="ES6标准入门粗读" data-url="http://allen286.github.io/2016/10/11/es6/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="Allen Tang" />
+          <p class="site-author-name" itemprop="name">Allen Tang</p>
+          <p class="site-description motion-element" itemprop="description">笨鸟慢慢爬</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/allen286" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/56571100" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:ascend286@126.com" target="_blank" title="邮箱">
+                  
+                    <i class="fa fa-fw fa-envelope"></i>
+                  
+                  邮箱
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://allen286.github.io/resume" target="_blank" title="简历">
+                  
+                    <i class="fa fa-fw fa-user"></i>
+                  
+                  简历
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#块级作用域"><span class="nav-number">1.</span> <span class="nav-text">块级作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#let和const"><span class="nav-number">2.</span> <span class="nav-text">let和const</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量的解构赋值"><span class="nav-number">3.</span> <span class="nav-text">变量的解构赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拓展运算符-…"><span class="nav-number">4.</span> <span class="nav-text">拓展运算符(…)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组的拓展："><span class="nav-number">5.</span> <span class="nav-text">数组的拓展：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象的拓展："><span class="nav-number">6.</span> <span class="nav-text">对象的拓展：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Symbol"><span class="nav-number">7.</span> <span class="nav-text">Symbol</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Proxy和Reflect"><span class="nav-number">8.</span> <span class="nav-text">Proxy和Reflect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Set和Map数据结构"><span class="nav-number">9.</span> <span class="nav-text">Set和Map数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历器Iterator"><span class="nav-number">10.</span> <span class="nav-text">遍历器Iterator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Generator函数"><span class="nav-number">11.</span> <span class="nav-text">Generator函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise对象"><span class="nav-number">12.</span> <span class="nav-text">Promise对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async函数与Promise及Generator的比较"><span class="nav-number">13.</span> <span class="nav-text">async函数与Promise及Generator的比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class类"><span class="nav-number">14.</span> <span class="nav-text">Class类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修饰器Decorator"><span class="nav-number">15.</span> <span class="nav-text">修饰器Decorator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模块Module"><span class="nav-number">16.</span> <span class="nav-text">模块Module</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Allen Tang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"allen286"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

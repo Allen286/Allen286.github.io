@@ -260,6 +260,156 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/11/es6/" itemprop="url">
+                  ES6标准入门粗读
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-11T22:05:37+08:00" content="2016-10-11">
+              2016-10-11
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/11/es6/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/11/es6/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>为了面试，赶紧把ES6标准入门大致翻了一下，下面是一些要点笔记，很散很浅，以后再慢慢深入学习。</p>
+<h4 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h4><p>终于等来了块级作用域，但感觉以前学的好多的奇淫技巧可能以后就用不上了……</p>
+<h4 id="let和const"><a href="#let和const" class="headerlink" title="let和const"></a>let和const</h4><p>不存在变量提升，不允许重复声明let，const与块级作用域结合。<br>以后可以用let取代var了，全局变量优先用常量const。</p>
+<h4 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h4><p>这个蛮方便的，很强大，很多地方可以用到</p>
+<h4 id="拓展运算符-…"><a href="#拓展运算符-…" class="headerlink" title="拓展运算符(…)"></a>拓展运算符(…)</h4><ol>
+<li>拓展运算符+数组，用于将数组转化为，分割的的参数序列。  </li>
+</ol>
+<ul>
+<li>可以用来替代apply传参，例如<code>Math.max(...[1,2,3,5]) //5</code></li>
+<li>还可以用来合并数组，替代concat，例如<code>[1,2,...[3,4]] //[1, 2, 3, 4]</code></li>
+<li>与解构赋值搭配使用例如<code>[first,...rest]=[1,2,3,4,5]//rest=[2,3,4,5]</code> </li>
+</ul>
+<ol>
+<li>将字符串，类数组对象，Map及Set结构等具有iterator接口的对象转化为数组，<br>例如<code>[...&#39;haha&#39;] //[&quot;h&quot;, &quot;a&quot;, &quot;h&quot;, &quot;a&quot;]；[...arguments]；[...nodeList]；[...map.keys()]</code>  </li>
+</ol>
+<p><strong>rest参数</strong>，形式为“…变量名”，其实上面介绍拓展运算符时已经提到了。<br>如<code>function fn(...argname){}</code>，用于获取多与参数，把逗号隔开的值序列组合成一个数组，这样就不需要使用arguments对象了。<br><strong>注意</strong>：</p>
+<ul>
+<li>rest参数后面不能再有其他属性，不然会报错。<code>function(...a,b){} //error</code></li>
+<li>函数的length属性不包括rest参数，例如<code>function(a, ...b){}.length  //1</code></li>
+</ul>
+<h4 id="数组的拓展："><a href="#数组的拓展：" class="headerlink" title="数组的拓展："></a>数组的拓展：</h4><p><code>Array.from()</code>方法，用于将类数组对象和可遍历对象转化为数组。  </p>
+<ul>
+<li>类数组对象：arguments，NodeList集合，及具有length的对象  </li>
+<li>可遍历对象：字符串，及新增的Map和Set结构都具有Iterator接口，都可以被转化  </li>
+</ul>
+<h4 id="对象的拓展："><a href="#对象的拓展：" class="headerlink" title="对象的拓展："></a>对象的拓展：</h4><ul>
+<li>属性简洁表示法：允许写入对象和函数作为对象的属性和方法。允许只写属性名不写属性值，这是属性值等于属性名所代表的变量，如<code>ar foo=&#39;hehe&#39;; var obj={foo}; //obj{foo:&#39;hehe&#39;}</code>  </li>
+<li>属性名表达式：字面量定义时，允许表达式作为属性名，放在方括号内即可。<br>上面两者不能同时使用，否则会报错  </li>
+</ul>
+<p>对象方法的<code>name</code>属性，返回方法名</p>
+<p><code>Object.is()</code>用来比较两个值是否严格相等，类似===，但在+0===-0及NaN===NaN上有差别。<br><strong><code>Object.assign(target, source1,sourse2...)</code></strong>，将源对象可枚举属性复制到目标对象。<br>可以用来克隆对象，<code>Object.assign({},origin)</code><br>可以用来合并多个对象，<code>Object.assign({}, ...source)</code> </p>
+<blockquote>
+<p>当我们调用下面的函数的时候，由于Object.assign将覆盖之前的内容，所以并不能完全的做到融合对象，而是全部替换掉，所以返回的对象内容将变成最后一个值:<code>{a: {c: 3}</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Object.assign(&#123;a: &#123;b: 0&#125;&#125;, &#123;a: &#123;b: 1, c: 2&#125;&#125;, &#123;a: &#123;c: 3&#125;&#125;);</div></pre></td></tr></table></figure></p>
+<p>如何深层次的融合对象，比如我们期望的输出结果为：<br><code>{a:{b:1,c:3}}</code><br>这样我们必须实现自己的算法来完成深层复制了,不过github上已经有很多好的解决方案，比如<a href="https://github.com/sindresorhus/deep-assign/blob/master/index.js" target="_blank" rel="external">deep-merge</a> 通过递归的方式逐层的去调用assign函数。   </p>
+</blockquote>
+<p>assigh()既不是a的浅拷贝（简单的用等号赋值）也不是a的深拷贝，而是<strong>介于两者之间</strong>——深拷贝了第一级属性。<br>Object.assign() 只是一级属性复制，<strong>比浅拷贝多拷贝了一层</strong>而已。用的时候，要注意这个问题。  </p>
+<blockquote>
+<p>发现一个可以简单实现深拷贝的方法，思路就是将一个对象转成json字符串，然后又将字符串转回对象。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function jsonClone(obj) &#123;</div><div class="line">    return JSON.parse(JSON.stringify(obj));</div><div class="line">&#125;</div><div class="line">var clone = jsonClone(&#123; a:1 &#125;);</div></pre></td></tr></table></figure>
+<p><code>__proto__</code>属性，在附录中，依然是最好不要用。用<code>Object.setPropertyOf()</code>及<code>Object.getPropertyOf()</code>代替。</p>
+<h4 id="Symbol"><a href="#Symbol" class="headerlink" title="Symbol"></a>Symbol</h4><p>Symbol是ES6引入的一种原始数据类型，表示独一无二的值。作为属性名可以避免冲突。</p>
+<h4 id="Proxy和Reflect"><a href="#Proxy和Reflect" class="headerlink" title="Proxy和Reflect"></a>Proxy和Reflect</h4><p>为了操作对象提供的，等同于在语言层面做出修改，属于一种“元编程”。</p>
+<h4 id="Set和Map数据结构"><a href="#Set和Map数据结构" class="headerlink" title="Set和Map数据结构"></a>Set和Map数据结构</h4><p>非重数组及哈希</p>
+<h4 id="遍历器Iterator"><a href="#遍历器Iterator" class="headerlink" title="遍历器Iterator"></a>遍历器Iterator</h4><p>它是一种接口，为各种不同的数据结构提供统一的访问机制。<br>for……o循环，作为遍历所有数据结构的统一方法，内部是调用Symbol.iterator方法实现的</p>
+<h4 id="Generator函数"><a href="#Generator函数" class="headerlink" title="Generator函数"></a>Generator函数</h4><p>一种异步编程解决方案</p>
+<h4 id="Promise对象"><a href="#Promise对象" class="headerlink" title="Promise对象"></a>Promise对象</h4><p>用来传递异步操作的消息</p>
+<h4 id="async函数与Promise及Generator的比较"><a href="#async函数与Promise及Generator的比较" class="headerlink" title="async函数与Promise及Generator的比较"></a>async函数与Promise及Generator的比较</h4><h4 id="Class类"><a href="#Class类" class="headerlink" title="Class类"></a>Class类</h4><p>语法糖，class完全可以看做构造函数的另一种写法。<br>继承extends关键字实现继承，本质还是原型链实现，但写法更清晰更简单了</p>
+<h4 id="修饰器Decorator"><a href="#修饰器Decorator" class="headerlink" title="修饰器Decorator"></a>修饰器Decorator</h4><p>一个表达方式，用于修改类的行为<br>MIxin模式，即混入，在一个对象中混入另一个对象的方法</p>
+<h4 id="模块Module"><a href="#模块Module" class="headerlink" title="模块Module"></a>模块Module</h4><p>import，export<br>与CommonJS加载机制不同，CommonJS模块输出的是值的拷贝，ES6模块输出的是值的引用</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/08/closure/" itemprop="url">
                   闭包，上下文环境，作用域及this取值 笔记总结
                 </a>
@@ -552,7 +702,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -562,7 +712,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
