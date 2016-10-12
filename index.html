@@ -260,6 +260,141 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/12/firtInterview/" itemprop="url">
+                  记我的实习处女面
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-12T11:38:37+08:00" content="2016-10-12">
+              2016-10-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/12/firtInterview/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/12/firtInterview/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>昨天献出了自己实习处女面，回来后总结了下面试问题，与各位前端初学者共勉。</p>
+<h4 id="1、浏览器内核，也就是渲染引擎"><a href="#1、浏览器内核，也就是渲染引擎" class="headerlink" title="1、浏览器内核，也就是渲染引擎"></a>1、浏览器内核，也就是渲染引擎</h4><p>火狐浏览器的<code>gecko</code>内核没答上，Opera从自家的<code>presto</code>内核后转投谷歌webkit也没答。<br>顺便补充下js引擎吧：chrome是<code>v8</code>，火狐是<code>JagerMonkey</code>，IE是 <code>Chakra</code>查克拉</p>
+<h4 id="2、引入css几种形式？及其优先级顺序？"><a href="#2、引入css几种形式？及其优先级顺序？" class="headerlink" title="2、引入css几种形式？及其优先级顺序？"></a>2、引入css几种形式？及其优先级顺序？</h4><p>答了外部，嵌入，内联三种，其实还有外部除了<code>link</code>引入还有<code>@import</code>引入方式，漏掉了。<br>优先级是就近原则，级内联&gt;嵌入&gt;外部。<br>补充：<code>link</code>和<code>import</code>两种方式引入CSS的区别：</p>
+<ul>
+<li>　　区别1：link是XHTML标签，除了加载CSS外，还可以定义RSS等其他事务；@import属于CSS范畴，只能加载CSS。</li>
+<li>　　区别2：link引用CSS时，在页面载入时同时加载；@import需要页面网页完全载入以后加载。</li>
+<li>　　区别3：link是XHTML标签，无兼容问题；@import是在CSS2.1提出的，低版本的浏览器不支持。</li>
+<li>　　区别4：ink支持使用Javascript控制DOM去改变样式；而@import不支持。</li>
+</ul>
+<h4 id="3、position属性值有哪几种？及absolute是相对于什么进行定位？"><a href="#3、position属性值有哪几种？及absolute是相对于什么进行定位？" class="headerlink" title="3、position属性值有哪几种？及absolute是相对于什么进行定位？"></a>3、position属性值有哪几种？及absolute是相对于什么进行定位？</h4><p>没答出默认的static及sticky。<br><code>static | relative | absolute | fixed | sticky</code>(多数浏览器不支持，可忽略)<br>五种取值，其中<code>static</code>为默认值。另外inherit算不算？<br><code>absolute</code>相对于最近的<strong>非 static 定位祖先元素</strong>进行定位。定位元素（positioned element）是指计算后位置属性为<code>relative</code>、<code>absolute</code>、<code>fixed</code> 或 <code>sticky</code>的元素。<br><code>fixed</code>，通过指定元素相对于屏幕视口（<code>viewport</code>）的位置来指定元素位置。  </p>
+<h4 id="4、考察变量声明提升"><a href="#4、考察变量声明提升" class="headerlink" title="4、考察变量声明提升"></a>4、考察变量声明提升</h4><p>给了段代码让说输出会输出什么，为什么，以及在ES6中的差异。<br>挺简单的，略。不过跟ES6对比着说还是蛮有趣的。</p>
+<h4 id="5、js中有哪几种数据类型？"><a href="#5、js中有哪几种数据类型？" class="headerlink" title="5、js中有哪几种数据类型？"></a>5、js中有哪几种数据类型？</h4><p>回答的是6种，即五种基本类型值+object。面试官补充说function也是。<br>但高程里说的是六种，function算到对象里了，虽然typeof操作符也能识别function。</p>
+<h4 id="6、怎样识别数组？"><a href="#6、怎样识别数组？" class="headerlink" title="6、怎样识别数组？"></a>6、怎样识别数组？</h4><p>回答出三种：<code>instanceof</code>，<code>constructor</code>，<code>Object.prototye.toString()</code>；最后一种最稳定，推荐。<br>前两种方法在多个frame中穿梭时会出<a href="http://blog.csdn.net/lee_magnum/article/details/11555981" target="_blank" rel="external">问题</a><br>其实还有第四种：<code>Array.isArray()</code>，ES5中加入的方法，ie9+支持。  </p>
+<p>回来后顺便学习了下<strong>instanceof操作符的原理</strong>，<code>a instanceof b</code>，本质是比较<code>a.__proto__与b.prototye</code>，而且是循环比较，不等时让<code>a=a.__proto__</code>继续比较，循环到底依然不相等则返回<code>false</code>。<br>循环到底也就是<code>到Object.prototype.__proto__=null</code>。<a href="http://www.ibm.com/developerworks/cn/web/1306_jiangjj_jsinstanceof/" target="_blank" rel="external">详见这里</a></p>
+<h4 id="7、数组去重"><a href="#7、数组去重" class="headerlink" title="7、数组去重"></a>7、数组去重</h4><p>回答了5中方法：<code>indexOf</code>，<code>filter</code>，<code>hash</code>，<code>Object.keys()</code>，<code>ES6</code>的<code>Set</code>搭配<code>Array.from()</code>或拓展运算符<code>...</code><br>这个自我感觉回答的不错哈哈</p>
+<h4 id="8、说说你遇到过的浏览器兼容性问题，以及怎么解决的？"><a href="#8、说说你遇到过的浏览器兼容性问题，以及怎么解决的？" class="headerlink" title="8、说说你遇到过的浏览器兼容性问题，以及怎么解决的？"></a>8、说说你遇到过的浏览器兼容性问题，以及怎么解决的？</h4><p>这个答的最差，平时自己练习不怎么考虑兼容性问题，对自己只要求支持ie9以上就行。回来想了想，还是踩过一小点坑的。  </p>
+<h5 id="布局方面的兼容："><a href="#布局方面的兼容：" class="headerlink" title="布局方面的兼容："></a>布局方面的兼容：</h5><ul>
+<li>用<code>:after</code>伪元素清除浮动时针对ie6，7需加<code>zoom：1</code>触发<code>hasLayout</code>；  </li>
+<li>使用<code>header</code>，<code>footer</code>，<code>nav</code>等html5语义化标签时ie9一下不支持，尤其<code>nav</code>标签，以及通过某些hack方式可以让ie9以下支持html5标签；  </li>
+<li><code>flex</code>布局ie10+才支持，CSS3属性需加上相应浏览器前缀或借助<code>autoprefixe</code>等css后处理器。  </li>
+<li>那些<code>doctype</code>声明对布局的影响，什么触发标准模式之类的。这个我并不清楚，平时一直用html5的声明<code>&lt;!DOCTYPE html&gt;</code>，因为最简单。</li>
+</ul>
+<h5 id="js方面的兼容："><a href="#js方面的兼容：" class="headerlink" title="js方面的兼容："></a>js方面的兼容：</h5><ul>
+<li>平稳退化及普通兼容js高程有介绍到一些，如事件的兼容；</li>
+<li>数组的<code>forEach</code>，<code>filter</code>，<code>map</code>，<code>reduce</code>等ES5的遍历方法ie9一下不兼容，用普通for循环或者自己封装一个each函数，for循环为每个元素执行fn，数组项及数组索引作为fn参数；  </li>
+<li>字符串去除首尾空格<code>trim()</code>，可以用自己写正则实现<code>replace(/^/s+|/s+$/g, &#39;&#39;)</code>  </li>
+<li>数组的<code>indexOf</code>方法，<code>Object.keys()</code>方法，这些自己用过的ES5的方法，ie9以下不兼容。  </li>
+<li><code>ES6</code>当然更不兼容了，所以压根没提。  </li>
+<li>另外使用第三方库来解决兼容问题也是种很好的选择。  </li>
+</ul>
+<h4 id="9、问Ajax熟练程度"><a href="#9、问Ajax熟练程度" class="headerlink" title="9、问Ajax熟练程度"></a>9、问Ajax熟练程度</h4><p>由于只看书没写过就如实回答了，面试官建议装个服务器深入学习下<code>Ajax</code>，这方面蛮重要的。</p>
+<h4 id="10、jQuery掌握程度，有什么作品"><a href="#10、jQuery掌握程度，有什么作品" class="headerlink" title="10、jQuery掌握程度，有什么作品"></a>10、jQuery掌握程度，有什么作品</h4><p>如实回答只看了<code>锋利的jQuery</code>一书，连练习都没做过，没有作品。。。</p>
+<h4 id="11、实习生主要职责"><a href="#11、实习生主要职责" class="headerlink" title="11、实习生主要职责"></a>11、实习生主要职责</h4><p>包括移动端活动页面的制作，电脑端管理系统需求完善(<code>angular</code>)，甚至移动应用开发。然而这三者我都没接触过，计划<code>原生js</code>会再学习一段时间，同时强化下<code>ajax</code>，然后学习<code>http</code>协议，再然后才会学<code>MV**</code>之类的框架。</p>
+<h4 id="12、加分项"><a href="#12、加分项" class="headerlink" title="12、加分项"></a>12、加分项</h4><p>一门后端语言，以及前端模块化方案，工程化构建工具这些我都没接触过。  </p>
+<p>面试时间不长，大概二十多分钟，可能看我接触前端时间太短，基础不够没必要聊太多吧。面试官人很nice，感觉搞技术的人都很容易打交道。<br>总之面试问题还是很基础的，奈何自己基础不牢加紧张，表现很一般。正好也更认清了自己的水平，需要学习的东西还太多太多，再踏实学一段时间，打牢基础再出去实习吧。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/11/es6/" itemprop="url">
                   ES6标准入门粗读
                 </a>
@@ -702,7 +837,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -712,7 +847,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
