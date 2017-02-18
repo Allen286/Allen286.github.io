@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://allen286.github.io/"/>
-  <updated>2016-10-12T03:41:07.424Z</updated>
+  <updated>2017-02-18T14:44:23.228Z</updated>
   <id>http://allen286.github.io/</id>
   
   <author>
@@ -14,6 +14,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>自我怀疑</title>
+    <link href="http://allen286.github.io/2017/02/18/%E8%87%AA%E6%88%91%E6%80%80%E7%96%91/"/>
+    <id>http://allen286.github.io/2017/02/18/自我怀疑/</id>
+    <published>2017-02-18T14:10:22.000Z</published>
+    <updated>2017-02-18T14:44:23.228Z</updated>
+    
+    <content type="html"><![CDATA[<p>距离上次写博客已经过去四个月了，说实话当时弄博客完全是为了找实习，果然， 找到实习后再也没有写过任何东西了。  </p>
+<h3 id="关于实习，累-自我怀疑："><a href="#关于实习，累-自我怀疑：" class="headerlink" title="关于实习，累+自我怀疑："></a>关于实习，累+自我怀疑：</h3><p>实习三个多月，似乎接触了很多新东西，似乎又什么都没学会，很大一部分原因就是在接触这些东 后没有总结输出，只是不求甚解的在用，这样照猫画虎是没有任何意义的。想总结想学习，但业务压力太重，自己干活又慢，每天下班都很晚，周末又想出去逛逛，根本没时间学习提升以及自我总结（当然这都是接口，还是自己太懒怕苦）。  </p>
+<p>这种不知在忙什么的状态已经持续俩月了， 俩月来感觉进特别慢，跟刚实习没什么区别，但同时已由“新”实习生变“老”实习生了， 不能以新来为借口心安理得的干活慢了，也必须承担更多的业务了。问题是技术能力的增长幅度没跟上时间的增长，资历老了，技术却没什么进步，搞的自己压力也越来越大，开始怀疑自己智商，怀疑自己到底适不适合做前端，适不适合做程序员。  </p>
+<h3 id="行动，100天"><a href="#行动，100天" class="headerlink" title="行动，100天"></a>行动，100天</h3><p>这种怀疑搞的自己快崩溃了， 可每天只是怀疑自己， 却没有付出任何行动和努力去验证这想法。其实每行每业都有自己的艰辛，从来没什么事是容易的，没用心做过没有努力过的人根本没资格怀疑。所以，从现在起，我想真正尝试一把，真正花时间去学习。给自己100天的时间，做好实习本职工作，同时参加百度前端学院2017，实习之业余多看书总结，把瞎想的时间用在做上。   </p>
+<p>哪怕最后失败，至少问心无愧。  </p>
+<h5 id="ps"><a href="#ps" class="headerlink" title="ps."></a>ps.</h5><p>百度前端技术学院2017开始报名了，目前还没正式开课，但先提供了很有趣的热身题。</p>
+<ul>
+<li>第一题连线的考察思维发散与方案优化吧；</li>
+<li>第二题用到base64和js获取窗口高度；</li>
+<li>第三题是关于CSS的，考察布局定位以及transform属性等，要像素级还原；</li>
+<li>第四题吃小星星，提供API，调用函数即可，但我没吃到全部星星，分数很低。<br>热身题一路走下来还是很有趣的，百度真的在很用心的准备每年的任务，而且免费+开源，强烈安利。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;距离上次写博客已经过去四个月了，说实话当时弄博客完全是为了找实习，果然， 找到实习后再也没有写过任何东西了。  &lt;/p&gt;
+&lt;h3 id=&quot;关于实习，累-自我怀疑：&quot;&gt;&lt;a href=&quot;#关于实习，累-自我怀疑：&quot; class=&quot;headerlink&quot; title=&quot;关于实习
+    
+    </summary>
+    
+    
+      <category term="矫情" scheme="http://allen286.github.io/tags/%E7%9F%AB%E6%83%85/"/>
+    
+  </entry>
   
   <entry>
     <title>记我的实习处女面</title>
@@ -142,11 +175,11 @@
     </summary>
     
     
+      <category term="javascript" scheme="http://allen286.github.io/tags/javascript/"/>
+    
       <category term="ECMAScript 6" scheme="http://allen286.github.io/tags/ECMAScript-6/"/>
     
       <category term="ES6" scheme="http://allen286.github.io/tags/ES6/"/>
-    
-      <category term="javascript" scheme="http://allen286.github.io/tags/javascript/"/>
     
   </entry>
   
@@ -269,11 +302,11 @@
     </summary>
     
     
+      <category term="笔记" scheme="http://allen286.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
+    
       <category term="html" scheme="http://allen286.github.io/tags/html/"/>
     
       <category term="css" scheme="http://allen286.github.io/tags/css/"/>
-    
-      <category term="笔记" scheme="http://allen286.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
