@@ -49,9 +49,9 @@
     </summary>
     
     
-      <category term="git" scheme="http://allen286.github.io/tags/git/"/>
-    
       <category term="总结" scheme="http://allen286.github.io/tags/%E6%80%BB%E7%BB%93/"/>
+    
+      <category term="git" scheme="http://allen286.github.io/tags/git/"/>
     
       <category term="笔记" scheme="http://allen286.github.io/tags/%E7%AC%94%E8%AE%B0/"/>
     
@@ -142,11 +142,11 @@
     </summary>
     
     
-      <category term="总结" scheme="http://allen286.github.io/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="面试" scheme="http://allen286.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
       <category term="实习" scheme="http://allen286.github.io/tags/%E5%AE%9E%E4%B9%A0/"/>
+    
+      <category term="总结" scheme="http://allen286.github.io/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
