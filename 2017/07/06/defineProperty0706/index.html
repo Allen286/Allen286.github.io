@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="矫情," />
+  <meta name="keywords" content="javascript,Vue," />
 
 
 
@@ -86,19 +86,19 @@
 
 
 
-<meta name="description" content="距离上次写博客已经过去四个月了，说实话当时弄博客完全是为了找实习，果然， 找到实习后再也没有写过任何东西了。  
-关于实习，累+自我怀疑：实习三个多月，似乎接触了很多新东西，似乎又什么都没学会，很大一部分原因就是在接触这些东 后没有总结输出，只是不求甚解的在用，这样照猫画虎是没有任何意义的。想总结想学习，但业务压力太重，自己干活又慢，每天下班都很晚，周末又想出去逛逛，根本没时间学习提升以及自我总结">
+<meta name="description" content="1、proto 与prototype关系先看段代码：12345function Animal(name) &amp;#123;this.name = name&amp;#125;var kitty = new Animal(&apos;kitty&apos;)Animal.prototype === kitty.__proto__ // true
+对象__proto__属性的值就是它所对应的原型对象，每个对象都有proto属性来标识">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自我怀疑">
-<meta property="og:url" content="http://allen286.github.io/2017/02/18/自我怀疑/index.html">
+<meta property="og:title" content="__proto__ 与prototype，defineProperty与双向绑定">
+<meta property="og:url" content="http://allen286.github.io/2017/07/06/defineProperty0706/index.html">
 <meta property="og:site_name" content="Allen Tang's Blog">
-<meta property="og:description" content="距离上次写博客已经过去四个月了，说实话当时弄博客完全是为了找实习，果然， 找到实习后再也没有写过任何东西了。  
-关于实习，累+自我怀疑：实习三个多月，似乎接触了很多新东西，似乎又什么都没学会，很大一部分原因就是在接触这些东 后没有总结输出，只是不求甚解的在用，这样照猫画虎是没有任何意义的。想总结想学习，但业务压力太重，自己干活又慢，每天下班都很晚，周末又想出去逛逛，根本没时间学习提升以及自我总结">
-<meta property="og:updated_time" content="2017-02-18T14:44:23.228Z">
+<meta property="og:description" content="1、proto 与prototype关系先看段代码：12345function Animal(name) &amp;#123;this.name = name&amp;#125;var kitty = new Animal(&apos;kitty&apos;)Animal.prototype === kitty.__proto__ // true
+对象__proto__属性的值就是它所对应的原型对象，每个对象都有proto属性来标识">
+<meta property="og:updated_time" content="2017-07-06T08:32:10.527Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自我怀疑">
-<meta name="twitter:description" content="距离上次写博客已经过去四个月了，说实话当时弄博客完全是为了找实习，果然， 找到实习后再也没有写过任何东西了。  
-关于实习，累+自我怀疑：实习三个多月，似乎接触了很多新东西，似乎又什么都没学会，很大一部分原因就是在接触这些东 后没有总结输出，只是不求甚解的在用，这样照猫画虎是没有任何意义的。想总结想学习，但业务压力太重，自己干活又慢，每天下班都很晚，周末又想出去逛逛，根本没时间学习提升以及自我总结">
+<meta name="twitter:title" content="__proto__ 与prototype，defineProperty与双向绑定">
+<meta name="twitter:description" content="1、proto 与prototype关系先看段代码：12345function Animal(name) &amp;#123;this.name = name&amp;#125;var kitty = new Animal(&apos;kitty&apos;)Animal.prototype === kitty.__proto__ // true
+对象__proto__属性的值就是它所对应的原型对象，每个对象都有proto属性来标识">
 
 
 
@@ -119,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="http://allen286.github.io/2017/02/18/自我怀疑/"/>
+  <link rel="canonical" href="http://allen286.github.io/2017/07/06/defineProperty0706/"/>
 
-  <title> 自我怀疑 | Allen Tang's Blog </title>
+  <title> __proto__ 与prototype，defineProperty与双向绑定 | Allen Tang's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +261,7 @@
             
             
               
-                自我怀疑
+                __proto__ 与prototype，defineProperty与双向绑定
               
             
           </h1>
@@ -273,8 +273,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-18T22:10:22+08:00" content="2017-02-18">
-              2017-02-18
+            <time itemprop="dateCreated" datetime="2017-07-06T16:38:44+08:00" content="2017-07-06">
+              2017-07-06
             </time>
           </span>
 
@@ -284,8 +284,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/02/18/自我怀疑/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/18/自我怀疑/" itemprop="commentsCount"></span>
+                <a href="/2017/07/06/defineProperty0706/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/06/defineProperty0706/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -308,18 +308,35 @@
       
 
       
-        <p>距离上次写博客已经过去四个月了，说实话当时弄博客完全是为了找实习，果然， 找到实习后再也没有写过任何东西了。  </p>
-<h3 id="关于实习，累-自我怀疑："><a href="#关于实习，累-自我怀疑：" class="headerlink" title="关于实习，累+自我怀疑："></a>关于实习，累+自我怀疑：</h3><p>实习三个多月，似乎接触了很多新东西，似乎又什么都没学会，很大一部分原因就是在接触这些东 后没有总结输出，只是不求甚解的在用，这样照猫画虎是没有任何意义的。想总结想学习，但业务压力太重，自己干活又慢，每天下班都很晚，周末又想出去逛逛，根本没时间学习提升以及自我总结（当然这都是接口，还是自己太懒怕苦）。  </p>
-<p>这种不知在忙什么的状态已经持续俩月了， 俩月来感觉进特别慢，跟刚实习没什么区别，但同时已由“新”实习生变“老”实习生了， 不能以新来为借口心安理得的干活慢了，也必须承担更多的业务了。问题是技术能力的增长幅度没跟上时间的增长，资历老了，技术却没什么进步，搞的自己压力也越来越大，开始怀疑自己智商，怀疑自己到底适不适合做前端，适不适合做程序员。  </p>
-<h3 id="行动，100天"><a href="#行动，100天" class="headerlink" title="行动，100天"></a>行动，100天</h3><p>这种怀疑搞的自己快崩溃了， 可每天只是怀疑自己， 却没有付出任何行动和努力去验证这想法。其实每行每业都有自己的艰辛，从来没什么事是容易的，没用心做过没有努力过的人根本没资格怀疑。所以，从现在起，我想真正尝试一把，真正花时间去学习。给自己100天的时间，做好实习本职工作，同时参加百度前端学院2017，实习之业余多看书总结，把瞎想的时间用在做上。   </p>
-<p>哪怕最后失败，至少问心无愧。  </p>
-<h5 id="ps"><a href="#ps" class="headerlink" title="ps."></a>ps.</h5><p>百度前端技术学院2017开始报名了，目前还没正式开课，但先提供了很有趣的热身题。</p>
-<ul>
-<li>第一题连线的考察思维发散与方案优化吧；</li>
-<li>第二题用到base64和js获取窗口高度；</li>
-<li>第三题是关于CSS的，考察布局定位以及transform属性等，要像素级还原；</li>
-<li>第四题吃小星星，提供API，调用函数即可，但我没吃到全部星星，分数很低。<br>热身题一路走下来还是很有趣的，百度真的在很用心的准备每年的任务，而且免费+开源，强烈安利。</li>
-</ul>
+        <h3 id="1、proto-与prototype关系"><a href="#1、proto-与prototype关系" class="headerlink" title="1、proto 与prototype关系"></a>1、<strong>proto</strong> 与prototype关系</h3><p>先看段代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">name</span>) </span>&#123;</div><div class="line"><span class="keyword">this</span>.name = name</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> kitty = <span class="keyword">new</span> Animal(<span class="string">'kitty'</span>)</div><div class="line">Animal.prototype === kitty.__proto__ <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+<p>对象<code>__proto__</code>属性的值就是它所对应的原型对象，每个对象都有<strong>proto</strong>属性来标识自己所继承的原型，但只有函数才有<code>prototype</code>属性。  </p>
+<blockquote>
+<p>当你创建函数时，JS会为这个函数自动添加prototype属性。而一旦你把这个函数当作构造函数（constructor）调用（即通过new关键字调用），那么JS就会帮你创建该构造函数的实例，实例继承构造函数prototype的所有属性和方法（实例通过设置自己的<strong>proto</strong>指向承构造函数的prototype来实现这种继承）。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;&#125;</div><div class="line">A.prototype.constructor === A <span class="comment">// true</span></div><div class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</div><div class="line">a <span class="keyword">instanceof</span> A <span class="comment">// true</span></div><div class="line">a <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<p><code>instanceof</code>操作符正是通过探测<code>obj.__proto__.__proto__... === Constructor.prototype</code>来验证obj是否是Constructor的实例的</p>
+<h3 id="2、define-property，setter，getter"><a href="#2、define-property，setter，getter" class="headerlink" title="2、define property，setter，getter"></a>2、define property，setter，getter</h3><h4 id="首先区分访问器属性与数据属性"><a href="#首先区分访问器属性与数据属性" class="headerlink" title="首先区分访问器属性与数据属性"></a>首先区分访问器属性与数据属性</h4><p><strong>数据属性：</strong><br>数据属性包含一个数据值的位置,在这个位置可以读取和写入值。<br>属性特性（property）：<code>configurable</code>,<code>enumerable</code>,<code>writable</code>,<code>value</code><br>通过new Object或对象字面量创建的对象，它们属性的 [[Configurable]]、[[Enumerable]] 和 [[Writable]] 特性默认都被设置为 true，而 [[Value]] 特性被设置为指定的值。要修改属性默认的特性，必须使用 ECMAScript 的 Object.defineProperty() 方法。  </p>
+<pre><code class="javascript"><span class="keyword">var</span> a={<span class="attr">x</span>:<span class="number">1</span>};
+<span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(a,<span class="string">'x'</span>))
+<span class="comment">// Object {value: 1, writable: true, enumerable: true, configurable: true}</span>
+<span class="keyword">var</span> person = {};
+<span class="built_in">Object</span>.defineProperty(person,<span class="string">"name"</span>,{
+  <span class="attr">value</span>: <span class="string">"percy"</span>
+});
+<span class="built_in">console</span>.log(<span class="built_in">Object</span>.getOwnPropertyDescriptor(person,<span class="string">"name"</span>));
+<span class="comment">// Object {value: "percy", writable: false, enumerable: false, configurable: false}</span>
+</code></pre>
+<p><strong>访问器属性：</strong><br>访问器属性不包含数据值，它们包含一对getter和setter函数，在读取访问器属性时会调用getter函数，在写入访问器属性时会调用 setter函数并传入新值。<br>属性特性（property）： <code>configurable</code>，<code>enumerable</code>，<code>set</code>，<code>get</code><br>访问器属性不能直接定义，必须使用 Object.defineProperty() 来定义。</p>
+<p>ES5有三个操作会忽略enumerable为false的属性。</p>
+<ol>
+<li>for…in循环：只遍历对象自身的和继承的可枚举的属性</li>
+<li>Object.keys()：返回对象自身的所有可枚举的属性的键名</li>
+<li>JSON.stringify()：只串行化对象自身的可枚举的属性</li>
+</ol>
+<blockquote>
+<p>“访问器属性会优先访问，同名属性被忽略，即所谓的被<code>劫持</code>” </p>
+</blockquote>
+<p>实测了下，会将之前定义好的同名数据属性define为访问器属性，直接console将不会看到改属性，属性值也变为get函数中新定义的值。重新define value又可变回数据属性，但要注意数据描述符<code>value, writable</code>和访问描述符<code>set, get</code>,不能同时用，<br>会报错<code>invalid property descriptor. Cannot both specify accessors and a value or writable attribute.</code></p>
+<h4 id="拓展：vue双向绑定的实现"><a href="#拓展：vue双向绑定的实现" class="headerlink" title="拓展：vue双向绑定的实现"></a>拓展：vue双向绑定的实现</h4><p><strong>关键词：</strong> 访问器属性（数据劫持），发布订阅者模式<br>通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。<br>几个关键部分：监听器Observer，指令解析器Compile，Watcher连接Observer和Compile<br>简单实现可参考：<br><a href="https://juejin.im/entry/583bd53ca22b9d006dce11d7" target="_blank" rel="external">Vue.js双向绑定的实现原理</a> ,<br><a href="https://github.com/DMQ/mvvm" target="_blank" rel="external">自己动手实现双向绑定</a></p>
 
       
     </div>
@@ -342,7 +359,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/矫情/" rel="tag">#矫情</a>
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/Vue/" rel="tag">#Vue</a>
           
         </div>
       
@@ -351,16 +370,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/12/firtInterview/" rel="next" title="记我的实习处女面">
-                <i class="fa fa-chevron-left"></i> 记我的实习处女面
+              <a href="/2017/04/10/js数组本质/" rel="next" title="js数组本质">
+                <i class="fa fa-chevron-left"></i> js数组本质
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/17/Git基础/" rel="prev" title="Git基础命令与实战问题记录">
-                Git基础命令与实战问题记录 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/06/性能优化0706/" rel="prev" title="网站前端性能优化">
+                网站前端性能优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -376,10 +395,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="2017/02/18/自我怀疑/"
-     data-title="自我怀疑"
+        <div class="ds-share flat" data-thread-key="2017/07/06/defineProperty0706/"
+     data-title="__proto__ 与prototype，defineProperty与双向绑定"
      data-content=""
-     data-url="http://allen286.github.io/2017/02/18/自我怀疑/">
+     data-url="http://allen286.github.io/2017/07/06/defineProperty0706/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -406,8 +425,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/02/18/自我怀疑/"
-           data-title="自我怀疑" data-url="http://allen286.github.io/2017/02/18/自我怀疑/">
+      <div class="ds-thread" data-thread-key="2017/07/06/defineProperty0706/"
+           data-title="__proto__ 与prototype，defineProperty与双向绑定" data-url="http://allen286.github.io/2017/07/06/defineProperty0706/">
       </div>
     
   </div>
@@ -452,7 +471,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -462,7 +481,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -536,7 +555,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于实习，累-自我怀疑："><span class="nav-number">1.</span> <span class="nav-text">关于实习，累+自我怀疑：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行动，100天"><span class="nav-number">2.</span> <span class="nav-text">行动，100天</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ps"><span class="nav-number">2.0.1.</span> <span class="nav-text">ps.</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、proto-与prototype关系"><span class="nav-number">1.</span> <span class="nav-text">1、proto 与prototype关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、define-property，setter，getter"><span class="nav-number">2.</span> <span class="nav-text">2、define property，setter，getter</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先区分访问器属性与数据属性"><span class="nav-number">2.1.</span> <span class="nav-text">首先区分访问器属性与数据属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拓展：vue双向绑定的实现"><span class="nav-number">2.2.</span> <span class="nav-text">拓展：vue双向绑定的实现</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
